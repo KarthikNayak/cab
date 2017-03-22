@@ -26,6 +26,7 @@ import (
 	"net/http"
 )
 
+//Uber type exposes the uber cab and holds the Server Auth key.
 type Uber struct {
 	key string
 }
@@ -34,6 +35,8 @@ type errorMsg struct {
 	Message string `json:"message"`
 }
 
+//CabFare is a struct to parse the JSON returned via the Uber API when
+//fetching the fare estimate for a single class of vehicle.
 type CabFare struct {
 	Currency string  `json:"currency_code"`
 	Name     string  `json:"localized_display_name"`
@@ -46,19 +49,26 @@ type CabFare struct {
 	Dist     float64 `json:"distance"`
 }
 
+//CabFares is a struct to parse the JSON returned via the Uber API
+//when fetching the fare estimate for all vehicle classes.
 type CabFares struct {
 	Fares []CabFare `json:"prices"`
 }
 
+//CabTime is a struct to parse the JSON returned via the Uber API when
+//fetching the time to arrival estimate for a single class of vehicle.
 type CabTime struct {
 	Name     string `json:"localized_display_name"`
 	Estimate int    `json:"estimate"`
 }
 
+//CabTimes is a struct to parse the JSON returned via the Uber API when
+//fetching the time to arrival estimate for all vehicle classes.
 type CabTimes struct {
 	Times []CabTime `json:"times"`
 }
 
+//Init function assigns the Server Auth key
 func (u *Uber) Init() {
 	u.key = "xX9rSwC86iTW14KhhMBsz-cPKMufTQkgJ0ONCBh-"
 }
@@ -112,6 +122,8 @@ func (u *Uber) getUberData(url string, d interface{}) {
 	}
 }
 
+//GetFare gets the Fares for all classes of vehicles for a given
+//'from' and 'to' address.
 func (u *Uber) GetFare(a, b string) *cab.Fares {
 	from := geocode.GetCode(a)
 	to := geocode.GetCode(b)
@@ -139,6 +151,8 @@ func (u *Uber) GetFare(a, b string) *cab.Fares {
 	return fares
 }
 
+//GetTime gets the estimated time of arrival for all classes of
+//vehicles for a given address.
 func (u *Uber) GetTime(a string) *cab.Times {
 	loc := geocode.GetCode(a)
 

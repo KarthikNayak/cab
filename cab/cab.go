@@ -22,6 +22,7 @@ import (
 	"github.com/olekukonko/tablewriter"
 )
 
+//Fare holds the fare related data for a particular class of vehicles.
 type Fare struct {
 	Currency string
 	Name     string
@@ -31,28 +32,37 @@ type Fare struct {
 	Dist     float64
 }
 
+//Fares holds the fares for all classes of vehicles with the From and
+//to address.
 type Fares struct {
 	Fare []Fare
 	From string
 	To   string
 }
 
+//Time holds the estimated time of arrival for a particular class of vehicle.
 type Time struct {
 	Name string
 	Est  int
 }
 
+//Times holds the times for all class of vehicles with the pickup
+//Location.
 type Times struct {
 	Time []Time
 	Loc  string
 }
 
+//Cab interface is used to get the Fare and Time of arrival for any
+//given cab type.
 type Cab interface {
 	Init()
 	GetFare(a, b string) *Fares
 	GetTime(a string) *Times
 }
 
+//PrintFares pretty-prints the fares for the given 'from' and 'to'
+//address.
 func (f *Fares) PrintFares() {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetAutoWrapText(false)
@@ -74,6 +84,7 @@ func (f *Fares) PrintFares() {
 	table.Render()
 }
 
+//PrintTimes pretty-prints the time of arrival for the given 'location'.
 func (t *Times) PrintTimes() {
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetAutoWrapText(false)

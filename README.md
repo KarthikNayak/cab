@@ -1,3 +1,5 @@
+[![GoDoc](https://godoc.org/github.com/KarthikNayak/cab?status.svg)](https://godoc.org/github.com/KarthikNayak/cab)
+
 A pet project to copy and perhaps extend the functionality of "https://github.com/jaebradley/uber-cli", written in Go.
 
 * Only supports Uber ATM.
@@ -27,4 +29,3 @@ cab time -l "pickup location"
 ### Todo
 
 1. Write Unit Tests
-2. GoDoc integration

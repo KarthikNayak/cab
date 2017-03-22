@@ -25,6 +25,8 @@ var (
 	key = "AIzaSyC9bUXljlN24C4fywUls1MUq0xPYKzv3hM"
 )
 
+//GetCode returns the Latitude and Longitude values given an address
+//string. This is done using Google's geocode API.
 func GetCode(address string) maps.LatLng {
 	conn, err := maps.NewClient(maps.WithAPIKey(key))
 	if err != nil {
